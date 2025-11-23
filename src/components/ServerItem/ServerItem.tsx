@@ -1,20 +1,11 @@
 import React, { memo, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Server } from "../../types/server";
+import { ServerItemProps } from "../../types/server";
 import { parseMotd } from "../../utils/minecraftFormatter";
 import { FaPencilAlt, FaPlay, FaStop, FaSpinner, FaBan, FaTrash, FaExclamationTriangle } from "react-icons/fa";
 import "./ServerItem.css";
 
-interface ServerItemProps {
-	server: Server;
-	isRunning: boolean;
-	isLoading: boolean;
-	isExternal: boolean;
-	onToggle: () => void;
-	onDelete?: () => void;
-}
-
-const ServerItemComponent = ({ server, isRunning, isLoading, isExternal, onToggle, onDelete }: ServerItemProps) => {
+const ServerItemComponent = ({ server, isRunning, isLoading, isExternal, onToggle, onDelete, onEdit }: ServerItemProps) => {
 	const { t } = useTranslation();
 	const { name, status, path, settings, errorMessage } = server;
 
@@ -31,7 +22,7 @@ const ServerItemComponent = ({ server, isRunning, isLoading, isExternal, onToggl
 
 	const handleEditClick = (e: React.MouseEvent) => {
 		e.stopPropagation();
-		console.log("Edit server:", server.id);
+		if (onEdit) onEdit();
 	};
 
 	const handleDeleteClick = (e: React.MouseEvent) => {

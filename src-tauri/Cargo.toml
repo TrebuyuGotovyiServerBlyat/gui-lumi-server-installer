@@ -30,4 +30,5 @@ tauri-plugin-dialog = "2"
 serde_yaml = "0.9.34"
 fs2 = "0.4.3"
 rayon = "1.11.0"
+sysinfo = "0.37.2"
 

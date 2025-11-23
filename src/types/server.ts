@@ -31,3 +31,22 @@ export interface RunningServerState {
 	isRunning: boolean;
 	isStopping: boolean;
 }
+
+export interface ServerItemProps {
+	server: Server;
+	isRunning: boolean;
+	isLoading: boolean;
+	isExternal: boolean;
+	onToggle: () => void;
+	onDelete?: () => void;
+	onEdit?: () => void;
+}
+
+export interface SavedServer {
+	id: string;
+	name: string;
+	path: string;
+	coreJar: string;
+	xmx: string;
+	xms: string;
+}

@@ -6,9 +6,14 @@ use serde::{Deserialize, Serialize};
 use std::fs::{self, OpenOptions};
 use std::path::Path;
 use std::process::Command;
+use sysinfo::System;
 
 #[cfg(target_os = "windows")]
 use std::os::windows::process::CommandExt;
+
+fn default_memory() -> String {
+    "2G".to_string()
+}
 
 #[derive(Serialize, Clone)]
 struct JavaCheckResult {
@@ -63,6 +68,10 @@ struct SavedServer {
     path: String,
     #[serde(rename = "coreJar")]
     core_jar: String,
+    #[serde(default = "default_memory")]
+    xmx: String,
+    #[serde(default = "default_memory")]
+    xms: String,
 }
 
 #[derive(Debug, Serialize)]
@@ -89,6 +98,13 @@ struct ServerResponse {
 
 static JAVA_VERSION_REGEX: Lazy<Regex> =
     Lazy::new(|| Regex::new(r#"(?s).*version "(\d+)(?:.(\d+))?.*""#).unwrap());
+
+#[tauri::command]
+async fn get_total_memory() -> u64 {
+    let mut sys = System::new();
+    sys.refresh_memory();
+    sys.total_memory()
+}
 
 fn check_server_status_internal(server_path: &str) -> String {
     let path = Path::new(server_path).join("players").join("LOCK");
@@ -117,8 +133,10 @@ fn scan_server_folder_internal(server_path: &str) -> Result<ScanResult, String> 
     }
 
     let entries = fs::read_dir(path).map_err(|e| format!("Read dir error: {}", e))?;
+
     for entry in entries.flatten() {
         let p = entry.path();
+
         if p.is_file() {
             if let Some(ext) = p.extension().and_then(|s| s.to_str()) {
                 if ext.eq_ignore_ascii_case("jar") {
@@ -135,6 +153,7 @@ fn scan_server_folder_internal(server_path: &str) -> Result<ScanResult, String> 
     }
 
     let settings_path = path.join("settings.yml");
+
     if !settings_path.exists() {
         return Ok(ScanResult::NoSettings);
     }
@@ -327,7 +346,12 @@ async fn scan_and_check_servers(servers: Vec<SavedServer>) -> Vec<ServerResponse
 }
 
 #[tauri::command]
-async fn launch_server_terminal(path: String, core_jar: String) -> Result<u32, String> {
+async fn launch_server_terminal(
+    path: String,
+    core_jar: String,
+    xmx: String,
+    xms: String,
+) -> Result<u32, String> {
     let server_path = Path::new(&path);
     let jar_path = server_path.join(&core_jar);
 
@@ -338,9 +362,12 @@ async fn launch_server_terminal(path: String, core_jar: String) -> Result<u32, S
         ));
     }
 
+    let xmx_arg = format!("-Xmx{}", xmx);
+    let xms_arg = format!("-Xms{}", xms);
+
     #[cfg(target_os = "windows")]
     {
-        let java_cmd = format!("java -Xmx2G -Xms2G -jar \"{}\" nogui", core_jar);
+        let java_cmd = format!("java {} {} -jar \"{}\" nogui", xmx_arg, xms_arg, core_jar);
 
         let ps_script = format!(
             "$host.UI.RawUI.WindowTitle = 'Minecraft Server'; Set-Location -Path '{}'; {}; Read-Host 'Press Enter to exit...'",
@@ -361,7 +388,7 @@ async fn launch_server_terminal(path: String, core_jar: String) -> Result<u32, S
         let shell_cmd = format!(
             "cd \"{}\" && {}; exec bash",
             path,
-            format!("java -Xmx2G -Xms2G -jar \"{}\" nogui", core_jar)
+            format!("java {} {} -jar \"{}\" nogui", xmx_arg, xms_arg, core_jar)
         );
 
         let terminals = [
@@ -436,7 +463,8 @@ pub fn run() {
             check_server_status,
             launch_server_terminal,
             stop_server,
-            scan_and_check_servers
+            scan_and_check_servers,
+            get_total_memory
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

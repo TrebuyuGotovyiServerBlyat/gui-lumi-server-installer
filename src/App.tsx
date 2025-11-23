@@ -12,6 +12,7 @@ import SettingsPage from "./pages/settings/SettingsPage";
 import { getAppScale } from "./utils/storeSettings";
 
 import "./App.css";
+import EditServerPage from "./pages/edit-server/EditServerPage";
 
 const ZoomWrapper: React.FC<{
 	children: React.ReactNode;
@@ -125,6 +126,14 @@ function App() {
 											currentScale={appScale}
 											onScaleChange={setAppScale}
 										/>
+									</ZoomWrapper>
+								}
+							/>
+							<Route
+								path="/edit-server/:id"
+								element={
+									<ZoomWrapper scale={appScale} motionKey="edit-page">
+										<EditServerPage />
 									</ZoomWrapper>
 								}
 							/>

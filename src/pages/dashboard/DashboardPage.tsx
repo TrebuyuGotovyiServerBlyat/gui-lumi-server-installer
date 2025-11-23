@@ -154,10 +154,17 @@ const DashboardPage = () => {
 
 		setLoadingStates(prev => ({ ...prev, [server.id]: true }));
 
+		const savedServers = await getSavedServers();
+		const savedServer = savedServers.find(s => s.id === server.id);
+		const xmx = savedServer?.xmx || "2G";
+		const xms = savedServer?.xms || "2G";
+
 		try {
 			const pid = await invoke<number>("launch_server_terminal", {
 				path: server.path,
 				coreJar: server.coreJar,
+				xmx: xmx,
+				xms: xms
 			});
 
 			setRunningPids(prev => {
@@ -307,6 +314,7 @@ const DashboardPage = () => {
 								isExternal={isExternal}
 								onToggle={() => handleServerToggle(server)}
 								onDelete={() => handleDeleteClick(server.id, serverName)}
+								onEdit={() => navigate(`/edit-server/${server.id}`)}
 							/>
 						);
 					})}
