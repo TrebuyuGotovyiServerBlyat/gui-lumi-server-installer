@@ -1,9 +1,9 @@
 .instruction-card {
 	padding: 1.5rem;
-	background-color: rgba(20, 20, 20, 0.8);
+	background-color: var(--color-bg-card);
 	border-radius: 0.5rem;
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	border: 1px solid var(--color-border-light);
+	box-shadow: var(--shadow-card);
 	backdrop-filter: blur(5px);
 }
 
@@ -14,7 +14,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color-primary-glow, #b39dff);
+	color: var(--color-primary-glow);
 }
 
 .card-title svg {
@@ -33,23 +33,23 @@
 	display: block;
 	padding: 1rem;
 	border-radius: 0.5rem;
-	border: 1px solid rgba(179, 157, 255, 0.3);
-	background-color: rgba(179, 157, 255, 0.1);
+	border: 1px solid var(--color-border-primary-dim);
+	background-color: var(--color-primary-light-10);
 	text-decoration: none;
 	transition: background-color 0.2s ease, border-color 0.2s ease;
 	cursor: pointer;
 }
 
 .download-link-card:hover {
-	background-color: rgba(179, 157, 255, 0.2);
-	border-color: var(--color-primary-glow, #b39dff);
+	background-color: var(--color-border-primary-dim);
+	border-color: var(--color-primary-glow);
 }
 
 .download-link-title {
 	display: block;
 	font-size: 1.1rem;
 	font-weight: 500;
-	color: var(--color-text-primary, #fff);
+	color: var(--color-text-primary);
 	margin-bottom: 0.25rem;
 }
 
@@ -57,5 +57,5 @@
 	display: block;
 	font-size: 0.9rem;
 	font-weight: 300;
-	color: var(--color-text-secondary, #a0a0a0);
+	color: var(--color-text-muted);
 }

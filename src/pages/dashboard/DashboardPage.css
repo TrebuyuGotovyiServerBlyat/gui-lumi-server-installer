@@ -3,7 +3,7 @@
 	width: 100%;
 	height: 100vh;
 	background: transparent;
-	color: #ffffff;
+	color: var(--color-text-primary);
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -19,9 +19,9 @@
 }
 
 .icon-btn {
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	color: #aaa;
+	background: var(--color-bg-white-05);
+	border: 1px solid var(--color-border-light);
+	color: var(--color-text-muted);
 	width: 42px;
 	height: 42px;
 	border-radius: 12px;
@@ -34,20 +34,20 @@
 }
 
 .icon-btn:hover {
-	background: rgba(255, 255, 255, 0.1);
-	color: #fff;
-	border-color: rgba(255, 255, 255, 0.3);
+	background: var(--color-bg-white-10);
+	color: var(--color-text-primary);
+	border-color: var(--color-border-hover);
 }
 
 .icon-btn.add {
-	background: #646cff;
+	background: var(--color-primary);
 	border: none;
-	color: white;
+	color: var(--color-text-primary);
 }
 
 .icon-btn.add:hover {
-	background: #747bff;
-	box-shadow: 0 4px 15px rgba(100, 108, 255, 0.4);
+	background: var(--color-primary-hover);
+	box-shadow: var(--shadow-glow);
 }
 
 .state-container {
@@ -72,20 +72,20 @@
 	font-size: 2rem;
 	font-weight: 700;
 	margin-bottom: 0.5rem;
-	background: linear-gradient(90deg, #fff, #aaa);
+	background: linear-gradient(90deg, var(--color-text-primary), var(--color-text-muted));
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 
 .empty-content p {
-	color: #888;
+	color: var(--color-text-dim);
 	margin-bottom: 2rem;
 	line-height: 1.5;
 }
 
 .main-action-btn {
-	background: #646cff;
-	color: white;
+	background: var(--color-primary);
+	color: var(--color-text-primary);
 	border: none;
 	padding: 14px 28px;
 	font-size: 1rem;
@@ -96,13 +96,13 @@
 	align-items: center;
 	gap: 10px;
 	transition: all 0.2s;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 4px 10px var(--color-bg-transparent-strong);
 }
 
 .main-action-btn:hover {
-	background: #747bff;
+	background: var(--color-primary-hover);
 	transform: translateY(-2px);
-	box-shadow: 0 6px 20px rgba(100, 108, 255, 0.4);
+	box-shadow: 0 6px 20px var(--color-primary-light-40);
 }
 
 .server-list-wrapper {
@@ -132,11 +132,11 @@
 }
 
 .badge {
-	background: rgba(255, 255, 255, 0.1);
+	background: var(--color-bg-white-10);
 	font-size: 0.85rem;
 	padding: 4px 10px;
 	border-radius: 20px;
-	color: #ccc;
+	color: var(--color-text-secondary);
 }
 
 .server-grid {
@@ -157,10 +157,10 @@
 }
 
 .server-grid::-webkit-scrollbar-thumb {
-	background: rgba(255, 255, 255, 0.1);
+	background: var(--color-bg-white-10);
 	border-radius: 3px;
 }
 
 .server-grid::-webkit-scrollbar-thumb:hover {
-	background: rgba(255, 255, 255, 0.2);
+	background: var(--color-bg-white-20);
 }

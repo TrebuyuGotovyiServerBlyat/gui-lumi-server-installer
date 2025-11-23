@@ -13,7 +13,7 @@
 }
 
 .alert-modal-content {
-	background: #1e1e1e;
+	background: var(--color-bg-modal);
 	border: 1px solid #333;
 	border-radius: 12px;
 	width: 90%;
@@ -44,15 +44,15 @@
 }
 
 .alert-header.error {
-	color: #ff4d4d;
+	color: var(--color-danger)
 }
 
 .alert-header.warning {
-	color: #f1c40f;
+	color: var(--color-warning)
 }
 
 .alert-header.info {
-	color: #3498db;
+	color: var(--color-info)
 }
 
 .alert-body {

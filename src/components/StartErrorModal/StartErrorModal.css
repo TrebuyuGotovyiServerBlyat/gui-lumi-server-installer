@@ -4,7 +4,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba(0, 0, 0, 0.7);
+	background: var(--color-bg-overlay);
 	backdrop-filter: blur(4px);
 	display: flex;
 	align-items: center;
@@ -13,14 +13,14 @@
 }
 
 .start-error-content {
-	background: #1e1e1e;
-	border: 1px solid #333;
+	background: var(--color-bg-modal);
+	border: 1px solid var(--color-border-strong);
 	border-radius: 12px;
 	width: 90%;
 	max-width: 480px;
 	padding: 24px;
-	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-	color: #fff;
+	box-shadow: var(--shadow-modal);
+	color: var(--color-text-primary);
 	display: flex;
 	flex-direction: column;
 }
@@ -30,7 +30,7 @@
 	align-items: center;
 	gap: 12px;
 	margin-bottom: 16px;
-	color: #ff4d4d;
+	color: var(--color-danger);
 }
 
 .start-error-icon {
@@ -44,14 +44,14 @@
 }
 
 .start-error-body p {
-	color: #ccc;
+	color: var(--color-text-secondary);
 	margin-bottom: 12px;
 	font-size: 0.95rem;
 }
 
 .error-message-box {
-	background: rgba(255, 77, 77, 0.1);
-	border: 1px solid rgba(255, 77, 77, 0.3);
+	background: var(--color-danger-bg);
+	border: 1px solid var(--color-danger-border);
 	border-radius: 8px;
 	padding: 12px;
 	margin-bottom: 20px;
@@ -64,7 +64,7 @@
 }
 
 .error-message-box::-webkit-scrollbar-thumb {
-	background: rgba(255, 77, 77, 0.3);
+	background: var(--color-danger-border);
 	border-radius: 3px;
 }
 
@@ -72,7 +72,7 @@
 	margin: 0;
 	font-family: "Consolas", "Monaco", monospace;
 	font-size: 0.9rem;
-	color: #ffadad;
+	color: var(--color-text-soft-red);
 	white-space: pre-wrap;
 	word-break: break-word;
 }
@@ -83,8 +83,8 @@
 }
 
 .start-error-close-btn {
-	background: #333;
-	color: #fff;
+	background: var(--color-border-strong);
+	color: var(--color-text-primary);
 	border: none;
 	padding: 10px 24px;
 	border-radius: 6px;
@@ -94,5 +94,5 @@
 }
 
 .start-error-close-btn:hover {
-	background: #444;
+	background: var(--color-bg-white-15);
 }

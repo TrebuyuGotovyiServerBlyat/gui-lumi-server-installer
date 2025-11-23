@@ -4,7 +4,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba(0, 0, 0, 0.7);
+	background: var(--color-bg-overlay);
 	backdrop-filter: blur(4px);
 	display: flex;
 	align-items: center;
@@ -13,14 +13,14 @@
 }
 
 .delete-modal-content {
-	background: #1e1e1e;
-	border: 1px solid #333;
+	background: var(--color-bg-modal);
+	border: 1px solid var(--color-border-strong);
 	border-radius: 12px;
 	width: 90%;
 	max-width: 450px;
 	padding: 24px;
-	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-	color: #fff;
+	box-shadow: var(--shadow-modal);
+	color: var(--color-text-primary);
 }
 
 .delete-header {
@@ -28,7 +28,7 @@
 	align-items: center;
 	gap: 12px;
 	margin-bottom: 16px;
-	color: #ff4d4d;
+	color: var(--color-danger);
 }
 
 .delete-icon {
@@ -38,12 +38,12 @@
 .delete-body p {
 	margin-bottom: 12px;
 	line-height: 1.5;
-	color: #ccc;
+	color: var(--color-text-secondary);
 }
 
 .delete-warning-box {
-	background: rgba(255, 77, 77, 0.1);
-	border-left: 4px solid #ff4d4d;
+	background: var(--color-danger-bg);
+	border-left: 4px solid var(--color-danger);
 	padding: 12px;
 	border-radius: 4px;
 	margin: 16px 0 24px 0;
@@ -52,11 +52,11 @@
 .delete-warning-box p {
 	margin: 0;
 	font-size: 0.9rem;
-	color: #ffadad;
+	color: var(--color-text-soft-red);
 }
 
 .server-name-highlight {
-	color: #fff;
+	color: var(--color-text-primary);
 	font-weight: 600;
 }
 
@@ -76,8 +76,8 @@
 }
 
 .cancel-btn {
-	background: #333;
-	color: #fff;
+	background: var(--color-border-strong);
+	color: var(--color-text-primary);
 }
 
 .cancel-btn:hover {
@@ -85,13 +85,13 @@
 }
 
 .delete-confirm-btn {
-	background: #ff4d4d;
-	color: #fff;
+	background: var(--color-danger);
+	color: var(--color-text-primary);
 	display: flex;
 	align-items: center;
 	gap: 8px;
 }
 
 .delete-confirm-btn:hover {
-	background: #d63030;
+	background: var(--color-danger-hover);
 }

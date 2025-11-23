@@ -2,74 +2,15 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: rgba(255, 255, 255, 0.05);
+	background-color: var(--color-bg-white-05);
 	padding: 16px 20px;
 	border-radius: 10px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 1px solid var(--color-border-light);
 	transition: background-color 0.2s ease;
 }
 
 .server-item:hover {
-	background-color: rgba(255, 255, 255, 0.08);
-}
-
-.server-info {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-
-	.server-item {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 15px;
-		background: rgba(255, 255, 255, 0.05);
-		border-radius: 8px;
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		transition: all 0.3s ease;
-	}
-
-	.server-item.running {
-		border-color: rgba(46, 204, 113, 0.5);
-		background: rgba(46, 204, 113, 0.05);
-	}
-
-	.toggle-btn {
-		padding: 10px 24px;
-		border-radius: 6px;
-		border: none;
-		font-weight: bold;
-		cursor: pointer;
-		transition: all 0.2s;
-		min-width: 120px;
-	}
-
-	.toggle-btn.start {
-		background-color: #2ecc71;
-		color: white;
-	}
-
-	.toggle-btn.start:hover {
-		background-color: #27ae60;
-	}
-
-	.toggle-btn.stop {
-		background-color: #e74c3c;
-		color: white;
-	}
-
-	.toggle-btn.stop:hover {
-		background-color: #c0392b;
-	}
-
-	.toggle-btn:disabled {
-		opacity: 0.7;
-		cursor: not-allowed;
-		background-color: #95a5a6;
-	}
-
-	overflow: hidden;
-	flex: 1;
+	background-color: var(--color-bg-white-08);
 }
 
 .server-name {
@@ -79,6 +20,7 @@
 	font-size: 1.2rem;
 	font-weight: 600;
 	gap: 10px;
+	color: var(--color-text-primary);
 }
 
 .server-name span {
@@ -91,19 +33,19 @@
 	width: 12px;
 	height: 12px;
 	border-radius: 50%;
-	background-color: #888;
-	box-shadow: 0 0 4px #888;
+	background-color: var(--color-text-dim);
+	box-shadow: 0 0 4px var(--color-text-dim);
 	flex-shrink: 0;
 }
 
 .status-indicator.online {
-	background-color: #4ade80;
-	box-shadow: 0 0 4px #4ade80;
+	background-color: var(--color-success-bright);
+	box-shadow: 0 0 4px var(--color-success-bright);
 }
 
 .status-indicator.offline {
-	background-color: #f87171;
-	box-shadow: 0 0 4px #f87171;
+	background-color: var(--color-danger-light);
+	box-shadow: 0 0 4px var(--color-danger-light);
 }
 
 .server-path {
@@ -113,6 +55,7 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	color: var(--color-text-secondary);
 }
 
 .server-settings {
@@ -123,6 +66,7 @@
 	font-size: 0.9rem;
 	opacity: 0.8;
 	margin-top: 8px;
+	color: var(--color-text-secondary);
 }
 
 .setting-item {
@@ -172,7 +116,7 @@
 .server-edit-button {
 	background: none;
 	border: none;
-	color: #fff;
+	color: var(--color-text-primary);
 	opacity: 0.6;
 	font-size: 1.1rem;
 	cursor: pointer;
@@ -207,26 +151,26 @@
 .toggle-btn:disabled {
 	opacity: 0.7;
 	cursor: not-allowed;
-	background-color: #4a5568;
-	color: #cbd5e0;
+	background-color: var(--color-bg-white-15);
+	color: var(--color-text-secondary);
 }
 
 .toggle-btn.start {
-	background-color: #38a169;
-	color: white;
+	background-color: var(--color-success);
+	color: var(--color-text-primary);
 }
 
 .toggle-btn.start:hover:not(:disabled) {
-	background-color: #2f855a;
+	background-color: var(--color-success-hover);
 }
 
 .toggle-btn.stop {
-	background-color: #e53e3e;
-	color: white;
+	background-color: var(--color-danger-deep);
+	color: var(--color-text-primary);
 }
 
 .toggle-btn.stop:hover:not(:disabled) {
-	background-color: #c53030;
+	background-color: var(--color-danger-dark-hover);
 }
 
 .icon-spin {
@@ -244,11 +188,11 @@
 }
 
 .server-item.running-border {
-	border-left: 4px solid #38a169;
+	border-left: 4px solid var(--color-success);
 }
 
 .server-error-message {
-	color: #ff4d4d;
+	color: var(--color-danger);
 	font-size: 0.9rem;
 	display: flex;
 	align-items: center;
@@ -260,9 +204,9 @@
 }
 
 .server-delete-button {
-	background: rgba(255, 77, 77, 0.15);
-	border: 1px solid rgba(255, 77, 77, 0.3);
-	color: #ff4d4d;
+	background: var(--color-danger-bg);
+	border: 1px solid var(--color-danger-border);
+	color: var(--color-danger);
 	width: 36px;
 	height: 36px;
 	border-radius: 8px;
@@ -274,15 +218,15 @@
 }
 
 .server-delete-button:hover {
-	background: rgba(255, 77, 77, 0.3);
+	background: var(--color-danger-border);
 	transform: translateY(-1px);
 }
 
 .status-indicator.error {
-	background-color: #ff4d4d;
+	background-color: var(--color-danger);
 	box-shadow: 0 0 8px rgba(255, 77, 77, 0.5);
 }
 
 .server-item.error-border {
-	border-left: 3px solid #ff4d4d;
+	border-left: 3px solid var(--color-danger);
 }

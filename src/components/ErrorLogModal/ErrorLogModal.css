@@ -4,7 +4,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba(0, 0, 0, 0.7);
+	background: var(--color-bg-overlay);
 	backdrop-filter: blur(4px);
 	display: flex;
 	align-items: center;
@@ -13,14 +13,14 @@
 }
 
 .error-modal-content {
-	background: #1e1e1e;
-	border: 1px solid #333;
+	background: var(--color-bg-modal);
+	border: 1px solid var(--color-border-strong);
 	border-radius: 12px;
 	width: 90%;
 	max-width: 550px;
 	padding: 24px;
-	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-	color: #fff;
+	box-shadow: var(--shadow-modal);
+	color: var(--color-text-primary);
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
@@ -30,7 +30,7 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	color: #ff4d4d;
+	color: var(--color-danger);
 }
 
 .error-icon {
@@ -43,14 +43,14 @@
 }
 
 .error-description {
-	color: #ccc;
+	color: var(--color-text-secondary);
 	font-size: 0.95rem;
 	margin: 0;
 }
 
 .error-log-container {
-	background: rgba(0, 0, 0, 0.3);
-	border: 1px solid rgba(255, 77, 77, 0.3);
+	background: var(--color-bg-transparent-strong);
+	border: 1px solid var(--color-danger-border);
 	border-radius: 8px;
 	padding: 12px;
 	max-height: 200px;
@@ -61,7 +61,7 @@
 	margin: 0;
 	font-family: "Consolas", "Monaco", monospace;
 	font-size: 0.85rem;
-	color: #ffadad;
+	color: var(--color-text-soft-red);
 	white-space: pre-wrap;
 	word-break: break-word;
 }
@@ -86,20 +86,20 @@
 }
 
 .copy-btn {
-	background: rgba(255, 255, 255, 0.1);
-	color: #ccc;
+	background: var(--color-bg-white-10);
+	color: var(--color-text-secondary);
 }
 
 .copy-btn:hover {
-	background: rgba(255, 255, 255, 0.2);
-	color: #fff;
+	background: var(--color-bg-white-20);
+	color: var(--color-text-primary);
 }
 
 .close-error-btn {
-	background: #333;
-	color: #fff;
+	background: var(--color-border-strong);
+	color: var(--color-text-primary);
 }
 
 .close-error-btn:hover {
-	background: #444;
+	background: var(--color-bg-white-15);
 }

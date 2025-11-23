@@ -1,13 +1,13 @@
 .tab-button:hover:not(.active) {
-	color: aliceblue;
+	color: var(--color-text-primary);
 }
 
 .instruction-card {
 	padding: 1.5rem;
-	background-color: rgba(20, 20, 20, 0.8);
+	background-color: var(--color-bg-card);
 	border-radius: 0.5rem;
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	border: 1px solid var(--color-border-light);
+	box-shadow: var(--shadow-card);
 	backdrop-filter: blur(5px);
 }
 
@@ -18,7 +18,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--color-primary-glow, #b39dff);
+	color: var(--color-primary-glow);
 }
 
 .card-title svg {
@@ -28,7 +28,7 @@
 
 .linux-tabs-header {
 	display: flex;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-bottom: 1px solid var(--color-border-light);
 	margin-bottom: 1rem;
 	flex-wrap: wrap;
 }
@@ -39,7 +39,7 @@
 	padding: 0.75rem 1rem;
 	font-size: 1rem;
 	font-weight: 500;
-	color: var(--color-text-secondary, #a0a0a0);
+	color: var(--color-text-muted);
 	border: none;
 	background: none;
 	cursor: pointer;
@@ -49,8 +49,8 @@
 }
 
 .tab-button.active {
-	color: var(--color-primary-glow, #b39dff);
-	border-bottom-color: var(--color-primary-glow, #b39dff);
+	color: var(--color-primary-glow);
+	border-bottom-color: var(--color-primary-glow);
 }
 
 .tab-button svg {
@@ -70,7 +70,7 @@
 
 .code-title {
 	font-size: 0.9rem;
-	color: var(--color-text-secondary, #a0a0a0);
+	color: var(--color-text-muted);
 	margin-bottom: 0.5rem;
 	font-style: italic;
 	font-weight: 300;
@@ -79,22 +79,22 @@
 
 .code-snippet {
 	padding: 0.75rem;
-	background-color: rgba(255, 255, 255, 0.05);
+	background-color: var(--color-bg-white-05);
 	border-radius: 0.5rem;
 	font-size: 0.85rem;
 	font-family: monospace;
-	border: 1px solid rgba(179, 157, 255, 0.3);
+	border: 1px solid var(--color-border-primary-dim);
 }
 
 .code-label {
-	color: var(--color-primary-glow, #b39dff);
+	color: var(--color-primary-glow);
 	font-weight: 500;
 	display: block;
 	margin-bottom: 0.25rem;
 }
 
 .code-label-note {
-	color: var(--color-text-secondary, #a0a0a0);
+	color: var(--color-text-muted);
 	font-weight: 300;
 	display: block;
 	margin-top: 0.5rem;
@@ -103,11 +103,11 @@
 
 .code-content {
 	display: block;
-	color: #f3f4f6;
+	color: var(--color-text-primary);
 	white-space: pre-wrap;
 	cursor: text;
 	user-select: all;
-	background-color: rgba(179, 157, 255, 0.1);
+	background-color: var(--color-primary-light-10);
 	padding: 0.25rem;
 	border-radius: 4px;
 }

@@ -4,7 +4,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba(0, 0, 0, 0.7);
+	background: var(--color-bg-overlay);
 	backdrop-filter: blur(4px);
 	display: flex;
 	align-items: center;
@@ -13,14 +13,14 @@
 }
 
 .kill-modal-content {
-	background: #1e1e1e;
-	border: 1px solid #333;
+	background: var(--color-bg-modal);
+	border: 1px solid var(--color-border-strong);
 	border-radius: 12px;
 	width: 90%;
 	max-width: 450px;
 	padding: 24px;
-	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-	color: #fff;
+	box-shadow: var(--shadow-modal);
+	color: var(--color-text-primary);
 }
 
 .kill-header {
@@ -28,7 +28,7 @@
 	align-items: center;
 	gap: 12px;
 	margin-bottom: 16px;
-	color: #e74c3c;
+	color: var(--color-danger-dark);
 }
 
 .warning-icon {
@@ -38,12 +38,12 @@
 .kill-body p {
 	margin-bottom: 12px;
 	line-height: 1.5;
-	color: #ccc;
+	color: var(--color-text-secondary);
 }
 
 .warning-box {
-	background: rgba(231, 76, 60, 0.1);
-	border-left: 4px solid #e74c3c;
+	background: var(--color-danger-bg);
+	border-left: 4px solid var(--color-danger-dark);
 	padding: 12px;
 	border-radius: 4px;
 	margin: 16px 0 24px 0;
@@ -52,7 +52,7 @@
 .warning-box p {
 	margin: 0;
 	font-size: 0.9rem;
-	color: #ffadad;
+	color: var(--color-text-soft-red);
 }
 
 .kill-actions {
@@ -71,8 +71,8 @@
 }
 
 .cancel-btn {
-	background: #333;
-	color: #fff;
+	background: var(--color-border-strong);
+	color: var(--color-text-primary);
 }
 
 .cancel-btn:hover {
@@ -80,13 +80,13 @@
 }
 
 .kill-btn {
-	background: #e74c3c;
-	color: #fff;
+	background: var(--color-danger-dark);
+	color: var(--color-text-primary);
 	display: flex;
 	align-items: center;
 	gap: 8px;
 }
 
 .kill-btn:hover {
-	background: #c0392b;
+	background: var(--color-danger-dark-hover);
 }
