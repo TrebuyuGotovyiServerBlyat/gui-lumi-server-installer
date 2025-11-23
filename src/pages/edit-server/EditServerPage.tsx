@@ -119,29 +119,29 @@ const EditServerPage = () => {
 
 			<div className="edit-container-simple">
 				<div className="edit-header-simple">
-					<h2>{t("edit_server.title", "Настройки сервера")}</h2>
+					<h2>{t("edit_server.title")}</h2>
 				</div>
 
 				<div className="edit-content-scroll-simple">
 					<div className="edit-section-simple">
 						<div className="section-title-simple">
 							<FaServer className="section-icon" />
-							<span>{t("edit_server.general", "Основное")}</span>
+							<span>{t("edit_server.general")}</span>
 						</div>
 
 						<div className="input-group">
-							<label>{t("edit_server.server_name", "Имя сервера")}</label>
+							<label>{t("edit_server.server_name")}</label>
 							<input
 								type="text"
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 								className="styled-input"
-								placeholder="My Minecraft Server"
+								placeholder={t("edit_server.placeholder_name", "My Minecraft Server")}
 							/>
 						</div>
 
 						<div className="input-group read-only">
-							<label>{t("edit_server.path", "Путь к папке")}</label>
+							<label>{t("edit_server.path")}</label>
 							<input type="text" value={server.path} disabled className="styled-input disabled" />
 						</div>
 					</div>
@@ -149,10 +149,10 @@ const EditServerPage = () => {
 					<div className="edit-section-simple">
 						<div className="section-title-simple">
 							<FaMicrochip className="section-icon" />
-							<span>{t("edit_server.core", "Ядро сервера")}</span>
+							<span>{t("edit_server.core")}</span>
 						</div>
 						<div className="input-group">
-							<label>{t("edit_server.select_jar", "Исполняемый файл (.jar)")}</label>
+							<label>{t("edit_server.select_jar")}</label>
 							<select
 								value={coreJar}
 								onChange={(e) => setCoreJar(e.target.value)}
@@ -168,13 +168,15 @@ const EditServerPage = () => {
 					<div className="edit-section-simple">
 						<div className="section-title-simple">
 							<FaMemory className="section-icon" />
-							<span>{t("edit_server.memory", "Выделение RAM")}</span>
+							<span>{t("edit_server.memory")}</span>
 						</div>
 
 						<div className="memory-slider-container">
 							<div className="memory-display-simple">
 								<span className="memory-value-simple">{memoryGb} GB</span>
-								<span className="memory-total-simple">из {systemTotalRam} GB</span>
+								<span className="memory-total-simple">
+									{t("edit_server.memory_from", { total: systemTotalRam })}
+								</span>
 							</div>
 
 							<input
@@ -196,7 +198,7 @@ const EditServerPage = () => {
 							</div>
 
 							<p className="hint-text-simple">
-								{t("edit_server.memory_hint_slider", "Это значение будет установлено как для начальной (-Xms), так и для максимальной (-Xmx) памяти.")}
+								{t("edit_server.memory_hint_slider")}
 							</p>
 						</div>
 					</div>
@@ -208,10 +210,10 @@ const EditServerPage = () => {
 					</button>
 					<div className="right-actions-simple">
 						<button className="action-btn-simple cancel" onClick={() => navigate("/welcome")}>
-							{t("common.cancel", "Отмена")}
+							{t("common.cancel")}
 						</button>
 						<button className="action-btn-simple save" onClick={handleSave}>
-							<FaSave /> {t("common.save", "Сохранить")}
+							<FaSave /> {t("common.save")}
 						</button>
 					</div>
 				</div>

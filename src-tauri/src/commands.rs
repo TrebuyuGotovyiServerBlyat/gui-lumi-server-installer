@@ -1,9 +1,14 @@
+use futures_util::StreamExt;
 use once_cell::sync::Lazy;
 use rayon::prelude::*;
 use regex::Regex;
+use std::fs;
+use std::io::Write;
 use std::path::Path;
 use std::process::Command;
+use std::time::Duration;
 use sysinfo::System;
+use tauri::{Emitter, Window};
 
 #[cfg(target_os = "windows")]
 use std::os::windows::process::CommandExt;
@@ -283,4 +288,80 @@ pub async fn stop_server(pid: u32) -> Result<(), String> {
     }
 
     Ok(())
+}
+
+#[tauri::command]
+pub fn is_dir_empty(path: String) -> bool {
+    if let Ok(entries) = fs::read_dir(path) {
+        return entries.count() == 0;
+    }
+    false
+}
+
+#[tauri::command]
+pub async fn download_file(window: Window, url: String, path: String) -> Result<(), String> {
+    let client = reqwest::Client::new();
+    let mut res = client.get(&url).send().await.map_err(|e| e.to_string())?;
+
+    let total_size = res.content_length().unwrap_or(0);
+    let mut file = fs::File::create(&path).map_err(|e| e.to_string())?;
+    let mut downloaded: u64 = 0;
+
+    while let Some(chunk) = res.chunk().await.map_err(|e| e.to_string())? {
+        file.write_all(&chunk).map_err(|e| e.to_string())?;
+        downloaded += chunk.len() as u64;
+
+        if total_size > 0 {
+            let _ = window.emit("download_progress", (downloaded, total_size));
+        }
+    }
+
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn setup_lumi_server(path: String, core_jar: String) -> Result<(), String> {
+    let server_path = Path::new(&path);
+    let jar_path = server_path.join(&core_jar);
+    let settings_path = server_path.join("settings.yml");
+
+    if !jar_path.exists() {
+        return Err("Core jar file not found".to_string());
+    }
+
+    let mut child = Command::new("java")
+        .arg("-Xmx1G")
+        .arg("-Xms1G")
+        .arg("-jar")
+        .arg(&core_jar)
+        .arg("nogui")
+        .current_dir(server_path)
+        .stdout(std::process::Stdio::piped())
+        .stderr(std::process::Stdio::piped())
+        .spawn()
+        .map_err(|e| format!("Failed to start java: {}", e))?;
+
+    let start = std::time::Instant::now();
+
+    loop {
+        if settings_path.exists() {
+            let _ = child.kill();
+            tokio::time::sleep(Duration::from_secs(1)).await;
+            return Ok(());
+        }
+
+        if start.elapsed().as_secs() > 120 {
+            let _ = child.kill();
+            return Err("Timeout: settings.yml was not created in 120 seconds".to_string());
+        }
+
+        if let Ok(Some(status)) = child.try_wait() {
+            return Err(format!(
+                "Process exited unexpectedly with status: {}",
+                status
+            ));
+        }
+
+        tokio::time::sleep(Duration::from_millis(500)).await;
+    }
 }

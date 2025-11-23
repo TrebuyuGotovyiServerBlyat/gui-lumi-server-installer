@@ -90,7 +90,7 @@ const WhereJavaPage = () => {
 				<motion.h1
 					className="title-java-page"
 					variants={itemVariants}
-					transition={{ duration: 0.8 }}
+					transition={{ duration: 0.2 }}
 				>
 					{t("where_java.title")}
 				</motion.h1>
@@ -98,7 +98,7 @@ const WhereJavaPage = () => {
 				<motion.p
 					className="subtitle-java-page"
 					variants={itemVariants}
-					transition={{ duration: 0.8, delay: 0.1 }}
+					transition={{ duration: 0.2, delay: 0.1 }}
 				>
 					{isErrorText}
 				</motion.p>
@@ -106,7 +106,7 @@ const WhereJavaPage = () => {
 				<motion.div
 					className="instructions-wrapper"
 					variants={itemVariants}
-					transition={{ duration: 0.8, delay: 0.2 }}
+					transition={{ duration: 0.2, delay: 0.2 }}
 				>
 					{userOS === "linux" ? (
 						<>

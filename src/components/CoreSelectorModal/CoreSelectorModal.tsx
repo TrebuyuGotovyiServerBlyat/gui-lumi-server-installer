@@ -45,7 +45,6 @@ export const CoreSelectorModal = ({
 					{jars.map((jar) => (
 						<button key={jar} className="core-item-btn" onClick={() => onSelect(jar)}>
 							<span className="jar-name">{jar}</span>
-							<span className="select-badge">Select</span>
 						</button>
 					))}
 				</div>

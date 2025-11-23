@@ -1,4 +1,3 @@
-// Объявляем модули
 pub mod commands;
 pub mod models;
 pub mod utils;
@@ -19,7 +18,10 @@ pub fn run() {
             launch_server_terminal,
             stop_server,
             scan_and_check_servers,
-            get_total_memory
+            get_total_memory,
+            is_dir_empty,
+            download_file,
+            setup_lumi_server
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -93,5 +93,5 @@
 }
 
 .delete-confirm-btn:hover {
-	background: var(--color-danger-hover);
+	background: var(--color-danger-dark-hover);
 }

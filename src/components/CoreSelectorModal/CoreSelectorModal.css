@@ -121,21 +121,6 @@
 	font-size: 0.9rem;
 }
 
-.select-badge {
-	font-size: 0.75rem;
-	background: var(--color-bg-white-10);
-	padding: 2px 8px;
-	border-radius: 4px;
-	opacity: 0;
-	transition: opacity 0.2s;
-}
-
-.core-item-btn:hover .select-badge {
-	opacity: 1;
-	background: var(--color-primary);
-	color: var(--color-text-primary);
-}
-
 .core-actions {
 	display: flex;
 	justify-content: flex-end;

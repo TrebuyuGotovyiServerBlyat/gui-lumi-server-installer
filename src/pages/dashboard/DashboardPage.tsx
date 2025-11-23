@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { FaCog, FaPlus } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { FaCog, FaPlus, FaFolderOpen, FaMagic } from "react-icons/fa";
+import { motion, AnimatePresence, MotionStyle } from "framer-motion";
 import Lottie from "lottie-react";
 import { invoke } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
@@ -11,12 +11,14 @@ import { Server, ScanResult, RustServerConfig } from "../../types/server";
 import ServerItem from "../../components/ServerItem/ServerItem";
 import { getSavedServers, addSavedServer, removeSavedServer } from "../../utils/storeServers";
 import "./DashboardPage.css";
+
 import { AlertModal } from "../../components/AlertModal/AlerModal";
 import { CoreSelectorModal } from "../../components/CoreSelectorModal/CoreSelectorModal";
 import { KillServerModal } from "../../components/KillServerModal/KillServerModal";
 import { DeleteServerModal } from "../../components/DeleteServerModal/DeleteServerModal";
 import { ErrorLogModal } from "../../components/ErrorLogModal/ErrorLogModal";
 import { StartErrorModal } from "../../components/StartErrorModal/StartErrorModal";
+import { CreateServerModal } from "../../components/CreateServerModal/CreateServerModal";
 
 import loadingAnimation from "../../assets/animations/loading.json";
 
@@ -32,6 +34,10 @@ const DashboardPage = () => {
 
 	const loadingStatesRef = useRef(loadingStates);
 	const runningPidsRef = useRef(runningPids);
+
+	const [isAddMenuOpen, setIsAddMenuOpen] = useState(false);
+	const [showCreateModal, setShowCreateModal] = useState(false);
+	const menuRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => { loadingStatesRef.current = loadingStates; }, [loadingStates]);
 	useEffect(() => { runningPidsRef.current = runningPids; }, [runningPids]);
@@ -68,6 +74,61 @@ const DashboardPage = () => {
 		setAlert({ isOpen: true, title, message, type });
 	};
 
+	const menuVariants = {
+		hidden: {
+			opacity: 0,
+			y: -10,
+			scale: 0.95,
+			transition: { duration: 0.1 }
+		},
+		visible: {
+			opacity: 1,
+			y: 0,
+			scale: 1,
+			transition: {
+				type: "spring",
+				stiffness: 300,
+				damping: 20
+			}
+		},
+		exit: {
+			opacity: 0,
+			y: -10,
+			scale: 0.95,
+			transition: { duration: 0.1 }
+		}
+	};
+
+	const renderAddMenu = (positionStyle: MotionStyle) => (
+		<AnimatePresence>
+			{isAddMenuOpen && (
+				<motion.div
+					className="add-menu-dropdown"
+					style={positionStyle}
+					initial="hidden"
+					animate="visible"
+					exit="exit"
+
+					/** @ts-ignore */
+					variants={menuVariants}
+				>
+					<button
+						onClick={handleAddExistingServer}
+						className="menu-item"
+					>
+						<FaFolderOpen /> {t("dashboard.menu_add_existing")}
+					</button>
+					<button
+						onClick={handleOpenCreateModal}
+						className="menu-item"
+					>
+						<FaMagic /> {t("dashboard.menu_create_new")}
+					</button>
+				</motion.div>
+			)}
+		</AnimatePresence>
+	);
+
 	useEffect(() => {
 		const storedPids = localStorage.getItem("running_server_pids");
 		if (storedPids) {
@@ -78,6 +139,23 @@ const DashboardPage = () => {
 			}
 		}
 	}, []);
+
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+				setIsAddMenuOpen(false);
+			}
+		};
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, []);
+
+	const handleGlobalError = (errorMessage: string) => {
+		setErrorLogModal({
+			isOpen: true,
+			error: errorMessage
+		});
+	};
 
 	const loadServers = useCallback(async () => {
 		try {
@@ -226,7 +304,8 @@ const DashboardPage = () => {
 		}
 	};
 
-	const handleAddServer = async () => {
+	const handleAddExistingServer = async () => {
+		setIsAddMenuOpen(false);
 		try {
 			const selected = await open({ directory: true, multiple: false, title: t("dashboard.select_server_folder") });
 			if (selected && typeof selected === "string") {
@@ -244,6 +323,11 @@ const DashboardPage = () => {
 				error: typeof err === "string" ? err : (err.message || JSON.stringify(err))
 			});
 		}
+	};
+
+	const handleOpenCreateModal = () => {
+		setIsAddMenuOpen(false);
+		setShowCreateModal(true);
 	};
 
 	const processNewServerFolder = async (path: string) => {
@@ -280,7 +364,18 @@ const DashboardPage = () => {
 					<div className="empty-content">
 						<h1>{t("dashboard.empty_title")}</h1>
 						<p>{t("dashboard.empty_subtitle")}</p>
-						<button className="main-action-btn" onClick={handleAddServer}><FaPlus /> {t("dashboard.add_first_server")}</button>
+
+						<div style={{ position: 'relative', display: 'inline-block' }} ref={menuRef}>
+							<button className="main-action-btn" onClick={() => setIsAddMenuOpen(!isAddMenuOpen)}>
+								<FaPlus /> {t("dashboard.add_first_server")}
+							</button>
+							{renderAddMenu({
+								top: '100%',
+								left: '50%',
+								translateX: '-50%',
+								marginTop: '10px'
+							})}
+						</div>
 					</div>
 				</motion.div>
 			);
@@ -291,7 +386,23 @@ const DashboardPage = () => {
 				<header className="dashboard-header">
 					<h2>{t("dashboard.servers_title")} <span className="badge">{servers.length}</span></h2>
 					<div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-						<button className="icon-btn add" onClick={handleAddServer} title={t("dashboard.add_server_tooltip")}><FaPlus /></button>
+
+						<div className="add-btn-wrapper" style={{ position: 'relative' }} ref={menuRef}>
+							<button
+								className="icon-btn add"
+								onClick={() => setIsAddMenuOpen(!isAddMenuOpen)}
+								title={t("dashboard.add_server_tooltip")}
+							>
+								<FaPlus />
+							</button>
+
+							{renderAddMenu({
+								top: '100%',
+								right: 0,
+								marginTop: '10px'
+							})}
+						</div>
+
 					</div>
 				</header>
 
@@ -364,6 +475,21 @@ const DashboardPage = () => {
 						isOpen={startErrorModal.isOpen}
 						error={startErrorModal.error}
 						onClose={() => setStartErrorModal({ isOpen: false, error: "" })}
+					/>
+				)}
+
+				{showCreateModal && (
+					<CreateServerModal
+						isOpen={showCreateModal}
+						onClose={() => setShowCreateModal(false)}
+						onSuccess={() => {
+							setShowCreateModal(false);
+							loadServers();
+						}}
+						onError={(msg) => {
+							setShowCreateModal(false);
+							handleGlobalError(msg);
+						}}
 					/>
 				)}
 			</AnimatePresence>

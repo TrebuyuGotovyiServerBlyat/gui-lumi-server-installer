@@ -1,26 +1,117 @@
 {
 	"translation": {
 		"language": "English",
-		"next": "Next",
-		"back": "Back",
+		"title": "Lumi Servers Manager",
 		"common": {
 			"cancel": "Cancel",
-			"acknowledge": "Got it"
+			"acknowledge": "Got it",
+			"save": "Save"
 		},
-		"errors": {
-			"server_exists": "A server with this path already exists",
-			"save_error": "Save Error",
-			"action_failed": "Action Failed",
-			"settings_missing": "Settings file (settings.yml) not found",
-			"core_missing": "Core file ({{core}}) is missing",
-			"no_jars": "No jar files found in folder",
-			"unknown_error": "Unknown error"
+		"dashboard": {
+			"servers_title": "My Servers",
+			"empty_title": "¯\\_(ツ)_/¯",
+			"empty_subtitle": "Oops... Looks like you don't have any servers xD.",
+			"add_first_server": "Add Server",
+			"menu_add_existing": "Add Existing",
+			"menu_create_new": "Create New Server",
+			"select_server_folder": "Select Server Folder",
+			"add_server_tooltip": "Add Server",
+			"default_new_server": "My Server",
+			"default_server_name": "Lumi Server",
+			"label_motd": "MOTD",
+			"label_port": "Port",
+			"label_players": "Players",
+			"edit_server_title": "Edit Server",
+			"start_server": "Start Server",
+			"stop_server": "Stop Server",
+			"start_action": "Run",
+			"kill_action": "Kill",
+			"loading": "Loading...",
+			"external": "External",
+			"external_tooltip": "Server running outside launcher (PID unknown)",
+			"delete_server": "Delete Server",
+			"status": {
+				"online": "Online",
+				"offline": "Offline",
+				"unknown": "Unknown",
+				"error": "Error"
+			},
+			"alerts": {
+				"duplicate": {
+					"title": "Duplicate",
+					"message": "This server is already in your list."
+				},
+				"not_server": {
+					"title": "Not a Server",
+					"message": "settings.yml file missing. Run the server once to generate files."
+				},
+				"no_jars": {
+					"title": "No Core Found",
+					"message": "No .jar files found in the selected folder."
+				}
+			},
+			"modal_kill": {
+				"title": "Force Stop",
+				"description": "You are about to force kill the server process. This is UNSAFE.",
+				"warning": "Data will not be saved (inventories, builds, etc.). It is recommended to use the 'stop' command or CTRL+C in the server console.",
+				"confirm": "Kill Anyway",
+				"cancel": "Cancel"
+			},
+			"modal_delete": {
+				"title": "Delete Server",
+				"description": "Are you sure you want to remove this server from the list?",
+				"warning": "Server files will remain on the disk, but the launcher configuration will be permanently deleted.",
+				"confirm": "Delete",
+				"cancel": "Cancel"
+			},
+			"modal_error_log": {
+				"title": "Scan Error",
+				"description": "Failed to add server. An error occurred while processing the folder:",
+				"copy": "Copy Error",
+				"close": "Close"
+			},
+			"modal_start_error": {
+				"title": "Start Error",
+				"description": "Failed to start the server. Check console or logs for details.",
+				"close": "Close"
+			}
 		},
-		"title": "Lumi Servers Manager",
-		"version": "Version {{version}}",
-		"welcome": {
-			"title": "Welcome!",
-			"subtitle": "The installer is ready to work."
+		"create_server": {
+			"select_folder_title": "Select an empty folder for the server",
+			"error": {
+				"not_empty": "The selected folder is not empty! Please select an empty folder.",
+				"broken_release": "Lumi core (.jar) not found in the latest release"
+			},
+			"process": {
+				"title": "Server Installation",
+				"fetching": "Contacting GitHub...",
+				"downloading": "Downloading Lumi core... {{percent}}%",
+				"setting_up": "First run initialization...",
+				"tea_message": "✨ While the server is downloading, you can get yourself some iced tea"
+			},
+			"success": {
+				"title": "Server Created!",
+				"description": "Core downloaded, configuration files generated. Your server has been successfully added to the list.",
+				"button": "Awesome"
+			},
+			"select": {
+				"title": "New Server",
+				"description_1": "Create a clean server based on the Lumi core.",
+				"description_2": "To start, select an empty folder.",
+				"button_select": "Select Folder"
+			}
+		},
+		"edit_server": {
+			"title": "Server Settings",
+			"general": "General",
+			"server_name": "Server Name",
+			"placeholder_name": "My Minecraft Server",
+			"path": "Folder Path",
+			"core": "Server Core",
+			"select_jar": "Executable File (.jar)",
+			"memory": "RAM Allocation",
+			"memory_from": "of {{total}} GB",
+			"memory_hint_slider": "This value will be set for both initial (-Xms) and maximum (-Xmx) memory."
 		},
 		"settings": {
 			"title": "Settings",
@@ -30,7 +121,6 @@
 		"where_java": {
 			"title": "Seems... You don't have Java installed?",
 			"java_not_found": "JDK {{version}} not found!",
-			"check_again_button": "Check Again",
 			"loading_config": "Loading instructions...",
 			"windows": {
 				"title": "For Windows",
@@ -84,90 +174,16 @@
 				}
 			}
 		},
-		"dashboard": {
-			"servers_title": "My Servers",
-			"empty_title": "¯\\_(ツ)_/¯",
-			"empty_subtitle": "Oops... Looks like you don't have any servers xD.",
-			"default_server_name": "Lumi Server",
-			"add_first_server": "Add Server",
-			"select_server_folder": "Select Server Folder",
-			"add_server_tooltip": "Add Server",
-			"default_new_server": "My Server",
-			"label_motd": "MOTD",
-			"label_port": "Port",
-			"label_players": "Players",
-			"edit_server_title": "Edit Server",
-			"refresh_server_tooltip": "Refresh List",
-			"start_server": "Start Server",
-			"stop_server": "Stop Server",
-			"start_action": "Run",
-			"kill_action": "Kill",
-			"loading": "Loading...",
-			"external": "External",
-			"external_tooltip": "Server running outside launcher (PID unknown)",
-			"confirm_delete": "Confirm Deletion",
-			"delete_server": "Delete Server",
-			"status": {
-				"online": "Online",
-				"offline": "Offline",
-				"unknown": "Unknown"
-			},
-			"alerts": {
-				"duplicate": {
-					"title": "Duplicate",
-					"message": "This server is already in your list."
-				},
-				"not_server": {
-					"title": "Not a Server",
-					"message": "settings.yml file missing. Run the server once to generate files."
-				},
-				"no_jars": {
-					"title": "No Core Found",
-					"message": "No .jar files found in the selected folder."
-				},
-				"external_process": {
-					"title": "Process Unavailable",
-					"message": "This server is running externally or its PID was lost. Stop it manually via server console or task manager."
-				}
-			},
-			"modal_kill": {
-				"title": "Force Stop",
-				"description": "You are about to force kill the server process. This is UNSAFE.",
-				"warning": "Data will not be saved (inventories, builds, etc.). It is recommended to use the 'stop' command or CTRL+C in the server console.",
-				"confirm": "Kill Anyway",
-				"cancel": "Cancel"
-			},
-			"modal_delete": {
-				"title": "Delete Server",
-				"description": "Are you sure you want to remove this server from the list?",
-				"warning": "Server files will remain on the disk, but the launcher configuration will be permanently deleted.",
-				"confirm": "Delete",
-				"cancel": "Cancel"
-			},
-			"modal_error_log": {
-				"title": "Scan Error",
-				"description": "Failed to add server. An error occurred while processing the folder:",
-				"copy": "Copy Error",
-				"close": "Close"
-			},
-			"errors": {
-				"server_exists": "A server with this path already exists",
-				"save_error": "Save Error",
-				"action_failed": "Action Failed",
-				"settings_missing": "Settings file (settings.yml) not found",
-				"core_missing": "Core file ({{core}}) is missing",
-				"no_jars": "No jar files found in folder",
-				"unknown_error": "Unknown error"
-			},
-			"modal_start_error": {
-				"title": "Start Error",
-				"description": "Failed to start the server. Check console or logs for details.",
-				"close": "Close"
-			}
-		},
 		"core_selector": {
 			"title": "Select Server Core",
 			"description": "Please select the file to run as core:"
+		},
+		"errors": {
+			"server_exists": "A server with this path already exists",
+			"save_error": "Save Error",
+			"save_failed": "Failed to save data",
+			"action_failed": "Action Failed",
+			"unknown_error": "Unknown error"
 		}
 	}
 }
